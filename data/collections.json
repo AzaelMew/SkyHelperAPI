@@ -331,7 +331,7 @@
     "name": "Seeds",
     "id": "SEEDS",
     "category": "FARMING",
-    "maxTiers": 6,
+    "maxTiers": 7,
     "tiers": [
       {
         "tier": 1,
@@ -356,6 +356,10 @@
       {
         "tier": 6,
         "amountRequired": 5000
+      },
+      {
+        "tier": 7,
+        "amountRequired": 25000
       }
     ]
   },
