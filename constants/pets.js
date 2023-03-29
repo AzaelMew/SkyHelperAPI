@@ -4028,6 +4028,22 @@ const pet_items = {
       description: `§7Increases all pet stats by §a33.3%`,
       multAllStats: 1.333,
     },
+    YELLOW_BANDANA: {
+      name: "Yellow Bandana",
+      tier: "RARE",
+      description: `§7Grants §6+30${symbols.farming_fortune.symbol} Farming Fortune§7.`,
+      stats: {
+        farming_fortune: 30,
+      },
+    },
+    GREEN_BANDANA: {
+      name: "Green Bandana",
+      tier: "EPIC",
+      description: `§7Grants §6+4${symbols.farming_fortune.symbol} Farming Fortune§7 for each of your Garden Levels.`,
+      statsPerGarden: {
+        farming_fortune: 4,
+      },
+    },
     PET_ITEM_TOY_JERRY: {
       name: "Jerry 3D Glasses",
       tier: "LEGENDARY",

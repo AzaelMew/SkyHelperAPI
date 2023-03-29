@@ -132,6 +132,9 @@ async function getPets(profile) {
             pet.stats[stat] =
               (pet.stats[stat] || 0) + constants.pet_items[heldItem].statsPerLevel[stat] * pet.level;
           }
+          for (const stat in constants.pet_items[helditem]?.statsPerGarden) {
+            // to be added
+          }
           for (const stat in constants.pet_items[heldItem]?.multStats) {
             if (pet.stats[stat]) {
               pet.stats[stat] = (pet.stats[stat] || 0) * constants.pet_items[heldItem].multStats[stat];
