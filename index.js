@@ -1,6 +1,5 @@
 //CREDIT: https://github.com/Senither/hypixel-skyblock-facade (Modified)
 var num =  1
-var api = "4fd2ea22-23ec-4543-9141-01288a80adfb"
 const FetchurRoute = require('./routes/v1/fetchur');
 const ProfileRoute = require('./routes/v1/profile');
 const ProfilesRoute = require('./routes/v1/profiles');

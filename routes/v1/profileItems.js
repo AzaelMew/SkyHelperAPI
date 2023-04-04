@@ -3,7 +3,7 @@ const { isUuid } = require('../../utils/uuid');
 const { makeRequest, wrap } = require('../../utils/request');
 const { parseProfileItems, parseHypixel } = require('../../utils/hypixel');
 let num =  1
-let api = "4fd2ea22-23ec-4543-9141-01288a80adfb"
+let api = process.env.HYPIXEL_API_KEY
 module.exports = wrap(async function (req, res) {
 
     const profileid = req.params.profileid;

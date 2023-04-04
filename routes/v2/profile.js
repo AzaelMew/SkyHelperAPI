@@ -12,7 +12,7 @@ module.exports = wrap(async function (req, res) {
             uuid = mojang_response.data.uuid.replace(/-/g, '');
         }
     }
-    const profileRes = await makeRequest(res, `https://api.hypixel.net/skyblock/profiles?key=4fd2ea22-23ec-4543-9141-01288a80adfb&uuid=${uuid}`);
+    const profileRes = await makeRequest(res, `https://api.hypixel.net/skyblock/profiles?key=${process.env.HYPIXEL_API_KEY}&uuid=${uuid}`);
     const profile = await parseNetworthProfile(profileRes, uuid, profileid, res);
 
     return res.status(200).json({ status: 200, data: profile });
