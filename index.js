@@ -20,7 +20,6 @@ const { refreshPrices } = require('./data/refreshPrices');
 const checkForUpdate = require('./middleware/checkforupdate');
 require('dotenv').config();
 const port = process.env.PORT || 3000;
-
 process.on('uncaughtException', (error) => console.log(error));
 process.on('unhandledRejection', (error) => console.log(error));
 

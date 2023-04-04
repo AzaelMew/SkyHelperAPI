@@ -2,8 +2,7 @@
 const { isUuid } = require('../../utils/uuid');
 const { makeRequest, wrap } = require('../../utils/request');
 const { parseProfileItems, parseHypixel, parseProfilesItems } = require('../../utils/hypixel');
-let num =  1
-let api = process.env.HYPIXEL_API_KEY
+
 module.exports = wrap(async function (req, res) {
 
     const profileid = req.params.profileid;
@@ -15,10 +14,10 @@ module.exports = wrap(async function (req, res) {
         }
     }
 
-    const playerRes = await makeRequest(res, `https://api.hypixel.net/player?key=${api}&uuid=${uuid}`);
+    const playerRes = await makeRequest(res, `https://api.hypixel.net/player?key=${process.env.HYPIXEL_API_KEY}&uuid=${uuid}`);
     const player = parseHypixel(playerRes, uuid, res);
 
-    const profileRes = await makeRequest(res, `https://api.hypixel.net/skyblock/profiles?key=${api}&uuid=${uuid}`);
+    const profileRes = await makeRequest(res, `https://api.hypixel.net/skyblock/profiles?key=${process.env.HYPIXEL_API_KEY}&uuid=${uuid}`);
     const profile = await parseProfilesItems(player, profileRes, uuid, res);
 
     return res.status(200).json({ status: 200, data: profile });
