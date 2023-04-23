@@ -25,7 +25,7 @@ process.on('unhandledRejection', (error) => console.log(error));
 
 const limiter = rateLimit({
     windowMs: 1000 * 60, // 1 minute
-    max: 120,
+    max: 140,
     standardHeaders: true,
     legacyHeaders: false,
     message: {
