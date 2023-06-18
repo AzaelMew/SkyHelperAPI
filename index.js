@@ -25,7 +25,7 @@ process.on('unhandledRejection', (error) => console.log(error));
 
 const limiter = rateLimit({
     windowMs: 1000 * 60, // 1 minute
-    max: 140,
+    max: 1000,
     standardHeaders: true,
     legacyHeaders: false,
     message: {
@@ -35,7 +35,6 @@ const limiter = rateLimit({
 });
 
 app.use(express.static(__dirname + '/public'));
-app.use(limiter);
 app.use(Auth);
 app.use(require('cors')());
 app.use(express.json({ limit: '15mb' }));
