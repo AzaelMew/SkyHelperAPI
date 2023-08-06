@@ -1,4 +1,5 @@
 //CREDIT: https://github.com/Senither/hypixel-skyblock-facade (Modified)
+const axios = require('axios')
 const getRank = require('../stats/rank');
 const getHypixelLevel = require('../stats/hypixelLevel');
 const getSkills = require('../stats/skills');
@@ -25,7 +26,25 @@ const { isUuid } = require('./uuid');
 const { getNetworth, getPrices } = require('skyhelper-networth');
 
 const getContent = require('../stats/items');
-
+async function getMuseum(profileID, uuid) {
+    try {
+        const { data } = await axios.get(
+            `https://api.hypixel.net/skyblock/museum?key=${process.env.HYPIXEL_API_KEY}&profile=${profileID}`
+        );
+        if (data.members[uuid] == undefined) return 0
+        else {
+            return {
+                museum: data.members[uuid],
+                museumData: data.members,
+            };
+        }
+    } catch (e) {
+        return {
+            museum: 0,
+            museumData: 0,
+        }
+    }
+}
 let prices = {};
 getPrices().then((data) => {
     prices = data;
@@ -88,18 +107,19 @@ module.exports = {
         }
 
         const profile = profileData.members[uuid];
-
+        const { museum } = await getMuseum(profileData.profile_id, uuid);
+        console.log(museum)
         return {
             uuid: uuid,
             name: profileData.cute_name,
             id: profileData.profile_id,
             selected: profileData.selected,
             first_join: profile.first_join,
-            sblevel: profile.leveling?.experience/100 || 0,
+            sblevel: profile.leveling?.experience / 100 || 0,
             gamemode: profileData?.game_mode || 'normal',
             purse: profile.coin_purse || 0,
             bank: profileData.banking?.balance || 0,
-            networth: await getNetworth(profile, profileData.banking?.balance, { prices }),
+            networth: await getNetworth(profile, profileData.banking?.balance, { museumData: museum, prices }),
         };
     },
     parseProfile: async function parseProfile(player, profileRes, uuid, profileid, res) {
@@ -127,9 +147,10 @@ module.exports = {
         }
 
         const profile = profileData.members[uuid];
+        const { museum } = await getMuseum(profileData.profile_id, uuid);
 
         const [networth, weight, crimson, trophy_fish, missing, armor, equipment, pets, talismans, cakebag] = await Promise.all([
-            getNetworth(profile, profileData.banking?.balance, { prices }),
+            getNetworth(profile, profileData.banking?.balance, { museumData: museum, prices }),
             getWeight(profile),
             getCrimson(profile),
             getTrophyFish(profile),
@@ -155,7 +176,7 @@ module.exports = {
             fairy_souls: profile.fairy_souls_collected || 0,
             purse: profile.coin_purse || 0,
             bank: profileData.banking?.balance || 0,
-            sblevel: profile.leveling?.experience/100 || 0,
+            sblevel: profile.leveling?.experience / 100 || 0,
             skills: getSkills(profile),
             networth,
             weight,
@@ -191,6 +212,7 @@ module.exports = {
                 continue;
             }
             const profile = profileData.members[uuid];
+            const { museum } = await getMuseum(profileData.profile_id, uuid);
 
             result.push({
                 uuid: uuid,
@@ -198,11 +220,11 @@ module.exports = {
                 id: profileData.profile_id,
                 selected: profileData.selected,
                 first_join: profile.first_join,
-                sblevel: profile.leveling?.experience/100 || 0,
+                sblevel: profile.leveling?.experience / 100 || 0,
                 gamemode: profileData?.game_mode || 'normal',
                 purse: profile.coin_purse || 0,
                 bank: profileData.banking?.balance || 0,
-                networth: await getNetworth(profile, profileData.banking?.balance, { prices }),
+                networth: await getNetworth(profile, profileData.banking?.balance, { museumData: museum, prices }),
             });
         }
         if (result.length == 0) res.status(404).json({ status: 404, reason: `Found no SkyBlock profiles for a user with a UUID of '${uuid}'.` });
@@ -221,9 +243,10 @@ module.exports = {
                 continue;
             }
             const profile = profileData.members[uuid];
+            const { museum } = await getMuseum(profileData.profile_id, uuid);
 
             const [networth, weight, crimson, trophy_fish, missing, armor, equipment, pets, talismans, cakebag] = await Promise.all([
-                getNetworth(profile, profileData.banking?.balance, { prices }),
+                getNetworth(profile, profileData.banking?.balance, { museumData: museum, prices }),
                 getWeight(profile),
                 getCrimson(profile),
                 getTrophyFish(profile),
@@ -250,7 +273,7 @@ module.exports = {
                 fairy_souls: profile.fairy_souls_collected || 0,
                 purse: profile.coin_purse || 0,
                 bank: profileData.banking?.balance || 0,
-                sblevel: profile.leveling?.experience/100 || 0,
+                sblevel: profile.leveling?.experience / 100 || 0,
                 skills: getSkills(profile),
                 networth,
                 weight,
