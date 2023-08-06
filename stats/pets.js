@@ -166,6 +166,7 @@ async function getPets(profile) {
         if (!heldItemObj) {
           heldItemObj = constants.pet_items[heldItem];
         }
+        if(heldItemObj == undefined) return
         lore.push("", `§6Held Item: §${constants.rarityColors[heldItemObj.tier.toLowerCase()]}${heldItemObj.name}`);
   
         if (heldItem in constants.pet_items) {
