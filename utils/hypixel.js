@@ -3,7 +3,6 @@ const axios = require('axios')
 const getRank = require('../stats/rank');
 const getHypixelLevel = require('../stats/hypixelLevel');
 const getSkills = require('../stats/skills');
-const getMilestones = require('../stats/milestones');
 const getCakebag = require('../stats/cakebag');
 const getMinions = require('../stats/minions');
 const getSlayer = require('../stats/slayer');
@@ -17,7 +16,6 @@ const getCollections = require('../stats/collections');
 const getMining = require('../stats/mining');
 const getDungeons = require('../stats/dungeons.js');
 const getTrophyFish = require('../stats/trophyFishing');
-const getCrimson = require('../stats/crimson.js');
 const getWeight = require('../stats/weight');
 const getMissing = require('../stats/missing');
 const getBestiary = require('../stats/bestiary');
@@ -149,10 +147,9 @@ module.exports = {
         const profile = profileData.members[uuid];
         const { museum } = await getMuseum(profileData.profile_id, uuid);
 
-        const [networth, weight, crimson, trophy_fish, missing, armor, equipment, pets, talismans, cakebag] = await Promise.all([
+        const [networth, weight, trophy_fish, missing, armor, equipment, pets, talismans, cakebag] = await Promise.all([
             getNetworth(profile, profileData.banking?.balance, { museumData: museum, prices }),
             getWeight(profile),
-            getCrimson(profile),
             getTrophyFish(profile),
             getMissing(profile),
             getArmor(profile),
@@ -161,7 +158,8 @@ module.exports = {
             getTalismans(profile),
             getCakebag(profile),
         ]);
-
+        console.log(equipment)
+        console.log(armor)
         return {
             uuid: uuid,
             name: profileData.cute_name,
@@ -182,11 +180,9 @@ module.exports = {
             weight,
             bestiary: getBestiary(profile),
             dungeons: getDungeons(player, profile),
-            crimson,
             trophy_fish,
             mining: getMining(player, profile),
             slayer: getSlayer(profile),
-            milestones: getMilestones(profile),
             missing,
             kills: getKills(profile),
             deaths: getDeaths(profile),
@@ -245,10 +241,9 @@ module.exports = {
             const profile = profileData.members[uuid];
             const { museum } = await getMuseum(profileData.profile_id, uuid);
 
-            const [networth, weight, crimson, trophy_fish, missing, armor, equipment, pets, talismans, cakebag] = await Promise.all([
+            const [networth, weight, trophy_fish, missing, armor, equipment, pets, talismans, cakebag] = await Promise.all([
                 getNetworth(profile, profileData.banking?.balance, { museumData: museum, prices }),
                 getWeight(profile),
-                getCrimson(profile),
                 getTrophyFish(profile),
                 getMissing(profile),
                 getArmor(profile),
@@ -279,11 +274,9 @@ module.exports = {
                 weight,
                 bestiary: getBestiary(profile),
                 dungeons: getDungeons(player, profile),
-                crimson,
                 trophy_fish,
                 mining: getMining(player, profile),
                 slayer: getSlayer(profile),
-                milestones: getMilestones(profile),
                 missing,
                 kills: getKills(profile),
                 deaths: getDeaths(profile),

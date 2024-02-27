@@ -2575,7 +2575,7 @@
     "name": "Prismarine Shard",
     "id": "PRISMARINE_SHARD",
     "category": "FISHING",
-    "maxTiers": 6,
+    "maxTiers": 7,
     "tiers": [
       {
         "tier": 1,
@@ -2600,6 +2600,10 @@
       {
         "tier": 6,
         "amountRequired": 400
+      },
+      {
+        "tier": 7,
+        "amountRequired": 800
       }
     ]
   },
@@ -2931,7 +2935,7 @@
     "name": "Clay",
     "id": "CLAY_BALL",
     "category": "FISHING",
-    "maxTiers": 5,
+    "maxTiers": 6,
     "tiers": [
       {
         "tier": 1,
@@ -2951,6 +2955,10 @@
       },
       {
         "tier": 5,
+        "amountRequired": 1500
+      },
+      {
+        "tier": 6,
         "amountRequired": 2500
       }
     ]
