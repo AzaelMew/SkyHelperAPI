@@ -1,6 +1,6 @@
 module.exports = {
     factions: {
-        "selected_faction": null,
+        "selected_faction": "test",
         "mages_reputation": 0,
         "barbarians_reputation": 0,
     },
@@ -11,14 +11,9 @@ module.exports = {
     kuudra_completed_tiers: {
         "none": 0,
         "hot": 0,
-        "highest_wave_none": 0,
-        "highest_wave_hot": 0,
         "burning": 0,
-        "highest_wave_burning": 0,
         "fiery": 0,
-        "highest_wave_fiery": 0,
-        "infernal": 0,
-        "highest_wave_infernal": 0
+        "infernal": 0
     },
     dojo: {
         "DOJO_POINTS_MOB_KB": 0,
@@ -32,8 +27,6 @@ module.exports = {
         "DOJO_POINTS_SNAKE": 0,
         "DOJO_TIME_SNAKE": 0,
         "DOJO_POINTS_FIREBALL": 0,
-        "DOJO_TIME_FIREBALL": 0,
-        "DOJO_POINTS_LOCK_HEAD": 0,
-        "DOJO_TIME_LOCK_HEAD": 0
+        "DOJO_TIME_FIREBALL": 0
     }
 }

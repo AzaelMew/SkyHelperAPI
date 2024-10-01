@@ -13,7 +13,7 @@ module.exports = async (profile) => {
         leggings: [],
         boots: [],
     };
-    const equipment_contents = {
+    const equippment_contents = {
         necklace: [],
         cloak: [],
         belt: [],
@@ -80,7 +80,7 @@ module.exports = async (profile) => {
                 equipment[i].tag.ExtraAttributes.timestamp = toTimestamp(equipment[i].tag.ExtraAttributes.timestamp) | null;
             }
 
-            equipment_contents[equipmentPieces[i]] = equipment[i];
+            equippment_contents[equipmentPieces[i]] = equipment[i];
         }
     }
 
@@ -299,7 +299,7 @@ module.exports = async (profile) => {
 
     return {
         inv_armor,
-        equipment_contents,
+        equippment_contents,
         backpack_contents,
         quiver_contents,
         talisman_bag,

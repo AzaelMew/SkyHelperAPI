@@ -7,12 +7,15 @@ module.exports = (player, profile) => {
     const player_perks = [];
     const disabled_perks = [];
 
-    for (const perk in Object.keys(mining_stats?.nodes || {}) || []) {
-        if (!Object.keys(mining_stats.nodes)[perk].startsWith('toggle_')) {
-            const currentPerk = perks[Object.keys(mining_stats.nodes)[perk]];
-            player_perks.push({ name: currentPerk.name, id: currentPerk.id, level: Object.values(mining_stats.nodes)[perk], maxLevel: currentPerk.max });
-        } else {
-            disabled_perks.push(Object.keys(mining_stats.nodes)[perk].substring(7));
+    for (const perkKey of Object.keys(mining_stats?.nodes || {})) {
+        const currentPerk = perks[perkKey];
+        if (currentPerk) {
+            const perkValue = mining_stats.nodes[perkKey];
+            if (!perkKey.startsWith('toggle_')) {
+                player_perks.push({ name: currentPerk.name, id: currentPerk.id, level: perkValue, maxLevel: currentPerk.max });
+            } else {
+                disabled_perks.push(perkKey.substring(7));
+            }
         }
     }
 
@@ -24,15 +27,15 @@ module.exports = (player, profile) => {
         part = titleCase(part, true);
     }
 
-    //Check if player has the "Quick Forge" perk in the Heart of the Mountain and change the duration of the items in the forge accordingly
+    // Check if player has the "Quick Forge" perk in the Heart of the Mountain and change the duration of the items in the forge accordingly
     if (mining_stats?.nodes?.quick_forge) {
         for (const item of Object.keys(forgeItemTimes)) {
-            const lessForgingTime = miningapi.mining_core.nodes.forge_time <= 19 ? 0.1 + miningapi.mining_core.nodes.forge_time * 0.005 : 0.3;
+            const lessForgingTime = mining_stats.nodes.forge_time <= 19 ? 0.1 + mining_stats.nodes.forge_time * 0.005 : 0.3;
             forgeItemTimes[item].duration = forgeItemTimes[item].duration - forgeItemTimes[item].duration * lessForgingTime;
         }
     }
 
-    //Forge Display
+    // Forge Display
     const forge_api = profile.forge?.forge_processes || [];
     const forge = [];
 
@@ -44,7 +47,7 @@ module.exports = (player, profile) => {
                 item: forgeItemTimes[item.id]?.name || 'Unknown',
                 id: item.id === 'AMMONITE' ? 'PET' : item.id,
                 ending: Number((item.startTime + forgeItemTimes[item.id]?.duration || 0).toFixed()),
-                ended: item.startTime + forgeItemTimes[item.id]?.duration || 0 < Date.now() ? true : false,
+                ended: (item.startTime + forgeItemTimes[item.id]?.duration || 0) < Date.now(),
             });
         }
     }
@@ -54,7 +57,7 @@ module.exports = (player, profile) => {
         mithril_powder: { current: mining_stats?.powder_mithril_total || 0, total: (mining_stats?.powder_mithril_total || 0) + (mining_stats?.powder_spent_mithril || 0) },
         gemstone_powder: { current: mining_stats?.powder_gemstone_total || 0, total: (mining_stats?.powder_gemstone_total || 0) + (mining_stats?.powder_spent_gemstone || 0) },
         hotM_tree: {
-            tokens: { current: mining_stats?.tokens || 0, total: mining_stats?.tokens || 0 + mining_stats?.tokens_spent || 0 },
+            tokens: { current: mining_stats?.tokens || 0, total: (mining_stats?.tokens || 0) + (mining_stats?.tokens_spent || 0) },
             level: mining_stats?.experience ? Number(toFixed(getHotM(mining_stats?.experience))) : 0,
             perks: player_perks,
             disabled_perks: disabled_perks,

@@ -13,10 +13,10 @@ module.exports = wrap(async function (req, res) {
             uuid = mojang_response.data.uuid.replace(/-/g, '');
         }
     }
-    const playerRes = await makeRequest(res, `https://api.hypixel.net/player?key=${process.env.HYPIXEL_API_KEY}&uuid=${uuid}`);
+    const playerRes = await makeRequest(res, `https://api.hypixel.net/v2/player?key=${process.env.HYPIXEL_API_KEY}&uuid=${uuid}`);
     const player = parseHypixel(playerRes, uuid, res);
 
-    const profileRes = await makeRequest(res, `https://api.hypixel.net/skyblock/profiles?key=${process.env.HYPIXEL_API_KEY}&uuid=${uuid}`);
+    const profileRes = await makeRequest(res, `https://api.hypixel.net/v2/skyblock/profiles?key=${process.env.HYPIXEL_API_KEY}&uuid=${uuid}`);
     const profile = await parseProfile(player, profileRes, uuid, profileid, res);
 
     return res.status(200).json({ status: 200, data: profile });

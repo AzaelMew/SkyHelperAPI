@@ -647,7 +647,7 @@
     "name": "Leather",
     "id": "LEATHER",
     "category": "FARMING",
-    "maxTiers": 10,
+    "maxTiers": 11,
     "tiers": [
       {
         "tier": 1,
@@ -663,30 +663,34 @@
       },
       {
         "tier": 4,
-        "amountRequired": 1000
+        "amountRequired": 500
       },
       {
         "tier": 5,
-        "amountRequired": 2500
+        "amountRequired": 1000
       },
       {
         "tier": 6,
-        "amountRequired": 5000
+        "amountRequired": 2500
       },
       {
         "tier": 7,
-        "amountRequired": 10000
+        "amountRequired": 5000
       },
       {
         "tier": 8,
-        "amountRequired": 25000
+        "amountRequired": 10000
       },
       {
         "tier": 9,
-        "amountRequired": 50000
+        "amountRequired": 25000
       },
       {
         "tier": 10,
+        "amountRequired": 50000
+      },
+      {
+        "tier": 11,
         "amountRequired": 100000
       }
     ]
@@ -896,6 +900,50 @@
       {
         "tier": 16,
         "amountRequired": 1400000
+      }
+    ]
+  },
+  {
+    "name": "Umber",
+    "id": "UMBER",
+    "category": "MINING",
+    "maxTiers": 9,
+    "tiers": [
+      {
+        "tier": 1,
+        "amountRequired": 1000
+      },
+      {
+        "tier": 2,
+        "amountRequired": 2500
+      },
+      {
+        "tier": 3,
+        "amountRequired": 10000
+      },
+      {
+        "tier": 4,
+        "amountRequired": 25000
+      },
+      {
+        "tier": 5,
+        "amountRequired": 100000
+      },
+      {
+        "tier": 6,
+        "amountRequired": 250000
+      },
+      {
+        "tier": 7,
+        "amountRequired": 500000
+      },
+      {
+        "tier": 8,
+        "amountRequired": 750000
+      },
+      {
+        "tier": 9,
+        "amountRequired": 1000000
       }
     ]
   },
@@ -1232,6 +1280,50 @@
     ]
   },
   {
+    "name": "Tungsten",
+    "id": "TUNGSTEN",
+    "category": "MINING",
+    "maxTiers": 9,
+    "tiers": [
+      {
+        "tier": 1,
+        "amountRequired": 1000
+      },
+      {
+        "tier": 2,
+        "amountRequired": 2500
+      },
+      {
+        "tier": 3,
+        "amountRequired": 10000
+      },
+      {
+        "tier": 4,
+        "amountRequired": 25000
+      },
+      {
+        "tier": 5,
+        "amountRequired": 100000
+      },
+      {
+        "tier": 6,
+        "amountRequired": 250000
+      },
+      {
+        "tier": 7,
+        "amountRequired": 500000
+      },
+      {
+        "tier": 8,
+        "amountRequired": 750000
+      },
+      {
+        "tier": 9,
+        "amountRequired": 1000000
+      }
+    ]
+  },
+  {
     "name": "Obsidian",
     "id": "OBSIDIAN",
     "category": "MINING",
@@ -1547,19 +1639,19 @@
       },
       {
         "tier": 3,
-        "amountRequired": 1000
-      },
-      {
-        "tier": 4,
         "amountRequired": 2500
       },
       {
+        "tier": 4,
+        "amountRequired": 10000
+      },
+      {
         "tier": 5,
-        "amountRequired": 5000
+        "amountRequired": 50000
       },
       {
         "tier": 6,
-        "amountRequired": 10000
+        "amountRequired": 100000
       },
       {
         "tier": 7,
@@ -1708,6 +1800,50 @@
       {
         "tier": 11,
         "amountRequired": 500000
+      }
+    ]
+  },
+  {
+    "name": "Glacite",
+    "id": "GLACITE",
+    "category": "MINING",
+    "maxTiers": 9,
+    "tiers": [
+      {
+        "tier": 1,
+        "amountRequired": 1000
+      },
+      {
+        "tier": 2,
+        "amountRequired": 2500
+      },
+      {
+        "tier": 3,
+        "amountRequired": 10000
+      },
+      {
+        "tier": 4,
+        "amountRequired": 25000
+      },
+      {
+        "tier": 5,
+        "amountRequired": 100000
+      },
+      {
+        "tier": 6,
+        "amountRequired": 250000
+      },
+      {
+        "tier": 7,
+        "amountRequired": 500000
+      },
+      {
+        "tier": 8,
+        "amountRequired": 750000
+      },
+      {
+        "tier": 9,
+        "amountRequired": 1000000
       }
     ]
   },
@@ -3135,7 +3271,7 @@
       },
       {
         "tier": 7,
-        "amountRequired": 80000
+        "amountRequired": 75000
       },
       {
         "tier": 8,
@@ -3143,7 +3279,7 @@
       },
       {
         "tier": 9,
-        "amountRequired": 400000
+        "amountRequired": 250000
       }
     ]
   },

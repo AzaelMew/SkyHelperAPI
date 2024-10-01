@@ -13,8 +13,16 @@ module.exports = async (profile) => {
             mythic: [],
             special: [],
             very: [],
+            mp: 0
         };
         const talisman_bag = (await decodeData(Buffer.from(profile.talisman_bag.data, 'base64'))).i;
+
+        if (profile?.accessory_bag_storage?.highest_magical_power){
+        talismans.mp = profile?.accessory_bag_storage?.highest_magical_power
+        } else {
+            talismans.mp = 0
+        }
+
 
         for (const talisman of talisman_bag) {
             if (talisman.tag?.display.Name && talisman.tag?.ExtraAttributes) {
@@ -56,6 +64,7 @@ module.exports = async (profile) => {
             epic: [],
             legendary: [],
             mythic: [],
+            mp: 0,
         };
     }
 };

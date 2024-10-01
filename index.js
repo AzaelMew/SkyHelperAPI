@@ -24,8 +24,8 @@ process.on('uncaughtException', (error) => console.log(error));
 process.on('unhandledRejection', (error) => console.log(error));
 
 const limiter = rateLimit({
-    windowMs: 1000 * 60, // 1 minute
-    max: 1000,
+    windowMs: 60000, // 1 minute
+    max: 10000,
     standardHeaders: true,
     legacyHeaders: false,
     message: {
@@ -37,14 +37,13 @@ const limiter = rateLimit({
 app.use(express.static(__dirname + '/public'));
 app.use(Auth);
 app.use(require('cors')());
-app.use(express.json({ limit: '150mb' }));
+app.use(express.json({ limit: '300mb' }));
 app.use(express.urlencoded({ extended: true }));
+app.use(limiter);
 
 app.get('/v1/fetchur', FetchurRoute);
 app.get('/v1/profile/:uuid/:profileid', ProfileRoute);
 app.get('/v1/profiles/:uuid', ProfilesRoute);
-app.get('/v1/items/:uuid/:profileid', ProfileItemsRoute);
-app.get('/v1/items/:uuid', ProfilesItemsRoute);
 
 app.get('/v2/profile/:uuid/:profileid', ProfileV2Route);
 app.get('/v2/profiles/:uuid', ProfilesV2Route);
