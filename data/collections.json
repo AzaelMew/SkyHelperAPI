@@ -3291,7 +3291,7 @@
     "tiers": [
       {
         "tier": 1,
-        "amountRequired": 1
+        "amountRequired": 50
       },
       {
         "tier": 2,

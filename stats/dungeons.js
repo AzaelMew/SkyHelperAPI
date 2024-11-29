@@ -1,13 +1,12 @@
 const calcSkill = require('../constants/skills');
 const { titleCase } = require('../constants/functions');
 
-module.exports = (player, profile) => {
+module.exports = (profile) => {
     try {
         const dungeons = profile?.dungeons;
         const catacombs = dungeons?.dungeon_types?.catacombs;
         if (!catacombs) {
             // Handle the case where 'catacombs' is not defined
-            console.error("'catacombs' is not defined in the profile.");
             return null; // or handle the error in a different way
         }
         const master_catacombs = dungeons?.dungeon_types?.master_catacombs; // Added an additional check here
@@ -61,7 +60,6 @@ module.exports = (player, profile) => {
 
         return {
             selected_class: titleCase(dungeons?.selected_dungeon_class),
-            secrets_found: player?.dungeons?.secrets || null,
             classes: {
                 healer: dungeons?.player_classes?.healer ? calcSkill('dungeoneering', dungeons.player_classes.healer.experience || 0) : 0,
                 mage: dungeons?.player_classes?.mage ? calcSkill('dungeoneering', dungeons.player_classes.mage.experience || 0) : 0,

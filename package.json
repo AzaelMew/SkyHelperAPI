@@ -22,10 +22,15 @@
         "express-rate-limit": "^6.3.0",
         "fs": "^0.0.1-security",
         "lilyweight": "^2.7.0",
+        "mongodb": "^6.9.0",
+        "mongoose": "^8.7.0",
+        "node-cache": "^5.1.2",
         "path": "^0.12.7",
         "pm2": "^5.3.1",
         "prismarine-nbt": "^1.6.0",
-        "skyhelper-networth": "^1.6.0",
+        "skyhelper-networth": "^1.25.0",
+        "sqlite": "^5.1.1",
+        "sqlite3": "^5.1.7",
         "util": "^0.12.4"
     },
     "engines": {

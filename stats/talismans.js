@@ -3,7 +3,7 @@ const { capitalize } = require('../constants/functions');
 const { talismans: allTalismans } = require('../constants/talismans');
 
 module.exports = async (profile) => {
-    if (profile.talisman_bag?.data) {
+    if (profile.inventory?.bag_contents?.talisman_bag?.data) {
         const talismans = {
             common: [],
             uncommon: [],
@@ -13,17 +13,20 @@ module.exports = async (profile) => {
             mythic: [],
             special: [],
             very: [],
-            mp: 0
+            mp: 0,
+            secrets: 0
         };
-        const talisman_bag = (await decodeData(Buffer.from(profile.talisman_bag.data, 'base64'))).i;
-
+        const talisman_bag = (await decodeData(Buffer.from(profile.inventory?.bag_contents?.talisman_bag?.data, 'base64'))).i;
         if (profile?.accessory_bag_storage?.highest_magical_power){
         talismans.mp = profile?.accessory_bag_storage?.highest_magical_power
         } else {
             talismans.mp = 0
         }
-
-
+        const generalMedallion = talisman_bag.find(item => {
+            const name = item?.tag?.display?.Name;
+            return name === "§5General's Medallion" || name === "§9General's Medallion";
+        });
+        talismans.secrets = generalMedallion?.tag?.display?.Lore[5].replace("§7Counter: §a","") || "Not Found"
         for (const talisman of talisman_bag) {
             if (talisman.tag?.display.Name && talisman.tag?.ExtraAttributes) {
                 let name = talisman.tag?.display.Name.replace(/\u00A7[0-9A-FK-OR]/gi, '') || null;
@@ -54,7 +57,6 @@ module.exports = async (profile) => {
                 else talismans[getRarity(talisman.tag?.display.Lore)] = new_talisman;
             }
         }
-        
         return talismans;
     } else {
         return {

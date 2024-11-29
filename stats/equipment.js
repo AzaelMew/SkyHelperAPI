@@ -1,4 +1,5 @@
 const { decodeData } = require('../utils/nbt');
+const { writeFileSync } = require('fs');
 
 module.exports = async (profile) => {
     const equippment_contents = {
@@ -8,8 +9,9 @@ module.exports = async (profile) => {
         gloves: [],
     };
 
-    if (profile.equippment_contents?.data) {
-        const equipment = (await decodeData(Buffer.from(profile.equippment_contents?.data, 'base64'))).i;
+    if (profile.inventory?.equipment_contents?.data) {
+        const equipment = (await decodeData(Buffer.from(profile.inventory?.equipment_contents?.data, 'base64'))).i;
+        writeFileSync('equipment.json', JSON.stringify(equipment, null, 4))
         const equipmentPieces = ['necklace', 'cloak', 'belt', 'gloves'];
         for (let i = 0; i < equipment.length; i++) {
             if (equipment[i].tag?.ExtraAttributes?.rarity_upgrades) {

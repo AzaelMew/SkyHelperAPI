@@ -1,24 +1,9 @@
-const { getHotM, perks, forgeItemTimes } = require('../constants/mining');
+const { getHotM, forgeItemTimes } = require('../constants/mining');
 const { toFixed, titleCase } = require('../constants/functions');
 const getSkills = require('./skills');
 
-module.exports = (player, profile) => {
+module.exports = (profile) => {
     const mining_stats = profile?.mining_core;
-    const player_perks = [];
-    const disabled_perks = [];
-
-    for (const perkKey of Object.keys(mining_stats?.nodes || {})) {
-        const currentPerk = perks[perkKey];
-        if (currentPerk) {
-            const perkValue = mining_stats.nodes[perkKey];
-            if (!perkKey.startsWith('toggle_')) {
-                player_perks.push({ name: currentPerk.name, id: currentPerk.id, level: perkValue, maxLevel: currentPerk.max });
-            } else {
-                disabled_perks.push(perkKey.substring(7));
-            }
-        }
-    }
-
     for (let statue of mining_stats?.biomes?.dwarven?.statues_placed || []) {
         statue = titleCase(statue);
     }
@@ -53,16 +38,13 @@ module.exports = (player, profile) => {
     }
 
     return {
-        mining: getSkills(player, profile).mining?.level || 0,
+        mining: getSkills(profile).mining?.level || 0,
         mithril_powder: { current: mining_stats?.powder_mithril_total || 0, total: (mining_stats?.powder_mithril_total || 0) + (mining_stats?.powder_spent_mithril || 0) },
         gemstone_powder: { current: mining_stats?.powder_gemstone_total || 0, total: (mining_stats?.powder_gemstone_total || 0) + (mining_stats?.powder_spent_gemstone || 0) },
         hotM_tree: {
             tokens: { current: mining_stats?.tokens || 0, total: (mining_stats?.tokens || 0) + (mining_stats?.tokens_spent || 0) },
             level: mining_stats?.experience ? Number(toFixed(getHotM(mining_stats?.experience))) : 0,
-            perks: player_perks,
-            disabled_perks: disabled_perks,
             last_reset: mining_stats?.last_reset || null,
-            pickaxe_ability: perks[mining_stats?.selected_pickaxe_ability]?.name || null,
         },
         crystal_hollows: {
             last_pass: mining_stats?.greater_mines_last_access || null,
@@ -108,6 +90,5 @@ module.exports = (player, profile) => {
                 },
             ],
         },
-        forge,
     };
 };

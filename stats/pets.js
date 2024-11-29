@@ -22,7 +22,7 @@ async function getPets(profile) {
 
     if (!("pets" in profile)) return output;
   
-    for (const pet of profile.pets) {
+    for (const pet of profile.pets_data?.pets) {
       if (!("tier" in pet)) {
         continue;
       }

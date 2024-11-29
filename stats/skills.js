@@ -26,6 +26,6 @@ module.exports = function getSkills(profile, weight) {
         carpentry: calcSkill('carpentry', skill_experience['carpentry'], weight),
         runecrafting: calcSkill('runecrafting', skill_experience['runecrafting'], weight),
         social: calcSkill('social', skill_experience['social'], weight),
-        taming: calcSkill('taming', skill_experience['taming'], weight),
+        taming: calcSkill('taming', skill_experience['taming'], weight,Array.isArray(profile?.pets_data?.pet_care?.pet_types_sacrificed) ? profile.pets_data.pet_care.pet_types_sacrificed.length : 0),
     };
 };
